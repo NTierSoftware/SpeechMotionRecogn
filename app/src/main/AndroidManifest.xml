@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="edu.cmu.pocketsphinx.demo"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+    <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="true" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/iclaunch_peacekeeper"
+        android:label="@string/app_name">
+
+        <receiver
+            android:name="org.peacekeeper.service.BootCompleted"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name="edu.cmu.pocketsphinx.demo.PocketSphinxActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".pkAlert"
+            android:label="@string/VoiceAlert">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.cmu.pocketsphinx.demo.PocketSphinxActivity" />
+        </activity>
+
+        <activity
+            android:name=".pkShook"
+            android:label="@string/ShakeAlert">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.cmu.pocketsphinx.demo.PocketSphinxActivity" />
+        </activity>
+
+        <service
+            android:name="org.peacekeeper.service.svcSpeechRecogn"
+            android:description="@string/svcSpeechRecogn"
+            android:enabled="true"
+            android:exported="true"
+            android:label="@string/svcSpeechRecogn"
+            android:process=":svcSpeechRecogn"
+            android:icon="@drawable/icstat_peacekeeper"
+
+            android:stopWithTask="false">
+        </service>
+    </application>
+
+</manifest>
